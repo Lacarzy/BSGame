@@ -1,0 +1,81 @@
+
+--输出日志--
+function log(str)
+    Util.Log(str);
+end
+
+--错误日志--
+function logError(str) 
+	Util.LogError(str);
+end
+
+--警告日志--
+function logWarn(str) 
+	Util.LogWarning(str);
+end
+
+--查找对象--
+function find(str)
+	return GameObject.Find(str);
+end
+
+function destroy(obj)
+	GameObject.Destroy(obj);
+end
+
+function newObject(prefab)
+	return GameObject.Instantiate(prefab);
+end
+
+--创建面板--
+function createPanel(name)
+	PanelManager:CreatePanel(name);
+end
+
+function child(str)
+	return transform:FindChild(str);
+end
+
+function subGet(childNode, typeName)		
+	return child(childNode):GetComponent(typeName);
+end
+
+function findPanel(str) 
+	local obj = find(str);
+	if obj == nil then
+		error(str.." is null");
+		return nil;
+	end
+	return obj:GetComponent("BaseLua");
+end
+
+--设置Image的sprite
+function setImg(obj,abname,assetname)
+	-- body
+	resMgr:LoadSprite(abname,{assetname},finishLoadImg,obj);
+end
+
+function finishLoadImg(sprites,obj)
+	obj:GetComponent("Image").sprite=sprites[0];
+	-- body
+end
+
+local nowctrlname;
+--打开界面
+function OpenPanel(ctrlName)
+	-- body
+	local ctrl = CtrlManager.GetCtrl(ctrlName);
+	if ctrl ~= nil then
+		ctrl:Awake();
+	end
+
+	if nowctrlname~=nil and nowctrlname~=CtrlNames.Tips then
+		-- body
+		local ctrl = CtrlManager.GetCtrl(nowctrlname);
+		if ctrl ~= nil then
+			ctrl.Close();
+		end
+	end
+
+	nowctrlname=ctrlName;
+end

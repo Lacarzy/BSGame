@@ -1,0 +1,40 @@
+message PlayerInfo{
+	required int32 userId = 1;
+    required int32 playerId = 2;
+	required string playerName =3;
+	required int32 coin = 4;
+    required int32 nowUseShape = 5;
+    repeated int32 allShape = 6;
+}
+
+message LoginRequest {
+	required string username = 1;
+	required string password = 2;
+}
+
+message LoginResponse {
+	required int32 succ = 1;
+	required PlayerInfo playerInfo =2;
+}
+
+message TipsMessage{
+	required string tips=1;
+}
+
+message UseShapeRequest{
+	required int32 shape=1;
+}
+
+message UseShapeResponse{
+	required int32 succ =1;
+	required int32 nowUseShape=2;
+}
+
+message BuyShapeRequest{
+	required int32 shape=1;
+}
+
+message BuyShapeResponse{
+	required int32 succ=1;
+	required PlayerInfo playerInfo =2;
+}
